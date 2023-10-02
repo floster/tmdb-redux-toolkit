@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { tmdbApi } from "./tmdb/tmdb.api";
+import { tmdbApi } from "./tmdb/tmdb.api.ts";
 
 // created 'store' should be 'provided' for whole app
 // see 'main.tsx' line 10 - <Provider store={store}>...
