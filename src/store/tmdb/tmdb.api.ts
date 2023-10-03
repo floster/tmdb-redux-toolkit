@@ -6,6 +6,7 @@ const API_ADULTS = false;
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   ICollection,
+  ICollectionPart,
   ICollectionSearch,
   IMovieSearch,
   ISearchResponse,
@@ -68,8 +69,8 @@ export const tmdbApi = createApi({
       transformResponse: (response: ISearchResponse<IMovieSearch>) =>
         response.results,
     }),
-    getMovie: build.query<any, number>({
-      query: (movieID: number) => ({
+    getMovie: build.query<ICollectionPart, string>({
+      query: (movieID: string) => ({
         url: `movie/${movieID}`,
         params: prepareParams,
       }),

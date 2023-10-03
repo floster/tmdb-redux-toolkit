@@ -6,14 +6,8 @@ import { Loader } from "../components/Loader";
 import { SearchField } from "../components/SearchField";
 
 export default function HomePage() {
-  const [
-    getCollection,
-    {
-      isLoading: isCollectionLoading,
-      isError: isCollectionError,
-      data: collectionData,
-    },
-  ] = useLazyGetCollectionQuery();
+  const [getCollection, { isLoading, isError, data: collections }] =
+    useLazyGetCollectionQuery();
 
   const handleCollectionClick = (id: number) => {
     getCollection(id);
@@ -22,17 +16,15 @@ export default function HomePage() {
   return (
     <>
       <SearchField onCollectionItemClick={handleCollectionClick} />
-      {isCollectionError ? (
+      {isError ? (
         <Error />
-      ) : isCollectionLoading ? (
+      ) : isLoading ? (
         <Loader />
       ) : (
         <>
-          <h2 className="text-xl font-bold my-6 px-4">
-            {collectionData?.name}
-          </h2>
+          <h2 className="text-xl font-bold my-6 px-4">{collections?.name}</h2>
           <CardsGrid>
-            {collectionData?.parts.map((item) => (
+            {collections?.parts.map((item) => (
               <Card key={item.id} data={item} />
             ))}
           </CardsGrid>
