@@ -1,3 +1,5 @@
+const POSTER_BASE = import.meta.env.VITE_TMDB_POSTER_BASE;
+
 import { FC, useState } from "react";
 import { ICollectionPart } from "../models/tmdb.models";
 import { useActions } from "../hooks/actions";
@@ -14,45 +16,50 @@ export const Card: FC<CardProps> = ({ data }) => {
     favorites.includes(String(data.title))
   );
 
-  const addFavoriteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const toggleFavoriteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    addFavorite(String(data.title));
-    setIsFavorite(true);
-  };
-
-  const removeFavoriteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    removeFavorite(String(data.title));
-    setIsFavorite(true);
+    if (isFavorite) {
+      removeFavorite(String(data.title));
+      setIsFavorite(false);
+    } else {
+      addFavorite(String(data.title));
+      setIsFavorite(true);
+    }
   };
 
   return (
-    <article className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="p-4">
-        <h2 className="text-base font-bold text-sky-800">{data.title}</h2>
-        <p className="text-gray-500 text-sm mb-3">
-          {" "}
-          ({new Date(data.release_date).getFullYear()})
-        </p>
-        <p className="text-gray-500 text-sm">{data.overview}</p>
-      </div>
-      <div className="p-4 bg-gray-100 mt-auto">
-        {!isFavorite && (
+    <article className="card bg-base-100 shadow-xl">
+      <figure>
+        <img src={`${POSTER_BASE}${data.poster_path}`} alt={data.title} />
+      </figure>
+      <div className="card-body px-6 pt-4 pb-2">
+        <span className="text-sm text-slate-400">
+          {new Date(data.release_date).getFullYear()}
+        </span>
+        <h2 className="card-title text-base">{data.title}</h2>
+        <div className="card-actions justify-end mt-auto">
           <button
-            onClick={addFavoriteHandler}
-            className="flex items-center justify-center px-4 py-2 bg-slate-200 hover:bg-blue-400 rounded"
+            className={`btn btn-md btn-square ${
+              isFavorite ? "text-yellow-500" : "text-slate-400"
+            }`}
+            onClick={toggleFavoriteHandler}
           >
-            add to ⭐️
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
           </button>
-        )}
-        {isFavorite && (
-          <button
-            onClick={removeFavoriteHandler}
-            className="flex items-center justify-center px-4 py-2 bg-slate-200 hover:bg-blue-400 rounded"
-          >
-            remove from ⭐️
-          </button>
-        )}
+        </div>
       </div>
     </article>
   );

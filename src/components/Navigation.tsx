@@ -2,18 +2,20 @@ import { Link } from "react-router-dom";
 
 export default function Navigation() {
   return (
-    <nav className="shadow-md bg-sky-600 text-sky-100 dark:bg-sky-800 dark:text-sky-200">
-      <div className="container flex justify-between items-center h-12 mx-auto p-4">
-        <h3 className="bold">TMDB Search</h3>
-        <div className="flex items-center gap-6">
-          <Link className="hover:text-sky-400" to="/">
-            Home
-          </Link>
-          <Link className="hover:text-sky-400" to="/favorites">
-            Favorites
-          </Link>
-        </div>
+    <div className="navbar bg-accent text-accent-content">
+      <div className="flex-1">
+        <span className="normal-case text-xl font-bold">TMDB Search</span>
       </div>
-    </nav>
+      <nav className="flex-none">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/favorites">Favorites</Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 }
