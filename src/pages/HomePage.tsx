@@ -7,10 +7,13 @@ import {
   useLazyGetCollectionQuery,
 } from "../store/tmdb/tmdb.api";
 import { useDebounce } from "../hooks/debounce";
+import { Card } from "../components/Card";
 
 const Error = () => (
   <span className="text-red-400">Something went wrong...</span>
 );
+
+const Loading = () => <span className="text-blue-400">Loading...</span>;
 
 export default function HomePage() {
   const [term, setTerm] = useState("");
@@ -70,7 +73,7 @@ export default function HomePage() {
                       nothing found...
                     </li>
                   ) : isCollectionsSearchLoading ? (
-                    <li className="text-sky-400 py-2 px-4">fetching data...</li>
+                    <Loading />
                   ) : (
                     collectionsSearchData?.map((collection) => (
                       <li
@@ -88,15 +91,24 @@ export default function HomePage() {
               )
             )}
           </div>
-          <pre className="w-[100%] dark:text-sky-300">
+          <section className="container w-[100%] dark:text-sky-300">
             {isCollectionError ? (
               <Error />
             ) : isCollectionLoading ? (
-              "loading..."
+              <Loading />
             ) : (
-              JSON.stringify(collectionData, null, 2)
+              <div>
+                <h2 className="text-lg font-bold my-6 px-4">
+                  {collectionData?.name}
+                </h2>
+                <div className="container grid grid-cols-3 gap-4">
+                  {collectionData?.parts.map((item) => (
+                    <Card key={item.id} data={item} />
+                  ))}
+                </div>
+              </div>
             )}
-          </pre>
+          </section>
         </div>
       </div>
     </>
