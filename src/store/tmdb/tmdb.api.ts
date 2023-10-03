@@ -27,6 +27,8 @@ const prepareParams = (params: Record<string, any>) => {
 };
 
 export const tmdbApi = createApi({
+  // It specifies the slice name in the Redux store where the generated API slice reducer will be mounted.
+  // This is useful when you have multiple API slices in your application.
   reducerPath: "tmdb/api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.themoviedb.org/3/",
