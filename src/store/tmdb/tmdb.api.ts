@@ -1,5 +1,5 @@
 const BEARER_KEY = import.meta.env.VITE_BEARER_KEY;
-const API_LANGUAGE = "uk-UA"; //"en-US";
+const API_LANGUAGE = "en-US"; //"uk-UA";
 const API_ADULTS = false;
 
 // it's important to add prefix /react in import below
