@@ -26,7 +26,7 @@ export const FavButton: FC<FavButtonProps> = ({ id }) => {
 
   return (
     <button
-      className={`btn btn-md btn-square ${
+      className={`absolute bottom-0 right-0 btn btn-ghost hover:bg-slate-100 btn-square ${
         isFavorite ? "text-yellow-500" : "text-slate-400"
       }`}
       onClick={toggleFavoriteHandler}

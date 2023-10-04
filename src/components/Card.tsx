@@ -18,14 +18,12 @@ export const Card: FC<CardProps> = ({ data }) => {
           alt={data.title}
         />
       </figure>
-      <div className="card-body px-6 pt-4 pb-2">
+      <div className="relative card-body px-6 py-4">
+        <h2 className="card-title text-base max-sm:text-lg">{data.title}</h2>
         <span className="text-sm text-slate-400">
           {new Date(data.release_date).getFullYear()}
         </span>
-        <h2 className="card-title text-base max-sm:text-lg">{data.title}</h2>
-        <div className="card-actions justify-end mt-auto">
-          <FavButton id={data.id} />
-        </div>
+        <FavButton id={data.id} />
       </div>
     </article>
   );
