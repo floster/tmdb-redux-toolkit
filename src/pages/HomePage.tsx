@@ -22,7 +22,7 @@ export default function HomePage() {
         <Loader />
       ) : (
         <>
-          <h2 className="text-xl font-bold my-6 px-4">{collections?.name}</h2>
+          <h2 className="text-xl font-bold my-6 px-2">{collections?.name}</h2>
           <CardsGrid>
             {collections?.parts.map((item) => (
               <Card key={item.id} data={item} />
