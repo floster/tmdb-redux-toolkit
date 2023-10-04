@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useFavorite } from "../hooks/favorite";
+import { useFavorite } from "../hooks/tmdb/favorite";
 
 interface FavButtonProps {
   id: number;

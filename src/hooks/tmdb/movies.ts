@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../hooks/redux";
-import { useLazyGetMovieQuery } from "../store/tmdb/tmdb.api";
-import { ICollectionPart } from "../models/tmdb.models";
+import { useAppSelector } from "../redux";
+import { useLazyGetMovieQuery } from "../../store/tmdb/tmdb.api";
+import { ICollectionPart } from "../../models/tmdb.models";
 
+/**
+ * A custom hook that fetches and displays a list of favorite movies.
+ * @returns {{ tiles: ICollectionPart[], isError: boolean, isLoading: boolean }} An object containing the list of movie tiles, an error flag, and a loading flag.
+ */
 export const useMovies = () => {
   const { favorites } = useAppSelector((state) => state.tmdb);
   const [tiles, setTiles] = useState<ICollectionPart[] | []>([]);

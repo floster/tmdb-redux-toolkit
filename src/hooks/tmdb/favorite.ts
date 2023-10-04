@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { useActions } from "../hooks/actions";
-import { useAppSelector } from "../hooks/redux";
+import { useActions } from "../actions";
+import { useAppSelector } from "../redux";
 
+/**
+ * A custom hook that manages the favorite state of a movie.
+ * @param {number} id The ID of the movie.
+ * @returns {{ isFavorite: boolean, toggleFavorite: (e: React.MouseEvent<HTMLButtonElement>) => void }} An object containing the favorite state and a function to toggle the favorite state.
+ */
 export const useFavorite = (id: number) => {
   const { favorites } = useAppSelector((state) => state.tmdb);
   const { addFavorite, removeFavorite } = useActions();

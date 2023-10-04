@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 
 import { Error } from "../components/Error";
 import { Loader } from "../components/Loader";
-import { useLiveSearch } from "../hooks/liveSearch";
+import { useLiveSearch } from "../hooks/tmdb/liveSearch";
 
 interface SearchFieldProps {
   onCollectionItemClick: (id: number) => void;

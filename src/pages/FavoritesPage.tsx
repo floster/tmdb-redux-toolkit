@@ -3,7 +3,7 @@ import { Loader } from "../components/Loader";
 import { CardsGrid } from "../components/CardsGrid";
 import { Card } from "../components/Card";
 
-import { useMovies } from "../hooks/movies";
+import { useMovies } from "../hooks/tmdb/movies";
 
 export default function FavoritesPage() {
   const { isError, isLoading, tiles } = useMovies();
