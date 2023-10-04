@@ -1,35 +1,19 @@
-import { FC, useState } from "react";
-import { useActions } from "../hooks/actions";
-import { useAppSelector } from "../hooks/redux";
+import { FC } from "react";
+import { useFavorite } from "../hooks/favorite";
 
 interface FavButtonProps {
   id: number;
 }
 
 export const FavButton: FC<FavButtonProps> = ({ id }) => {
-  const { favorites } = useAppSelector((state) => state.tmdb);
-  const { addFavorite, removeFavorite } = useActions();
-  const [isFavorite, setIsFavorite] = useState(() =>
-    favorites.includes(String(id))
-  );
-
-  const toggleFavoriteHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (isFavorite) {
-      removeFavorite(String(id));
-      setIsFavorite(false);
-    } else {
-      addFavorite(String(id));
-      setIsFavorite(true);
-    }
-  };
+  const { isFavorite, toggleFavorite } = useFavorite(id);
 
   return (
     <button
       className={`absolute bottom-0 right-0 btn btn-ghost hover:bg-slate-100 btn-square ${
         isFavorite ? "text-yellow-500" : "text-slate-400"
       }`}
-      onClick={toggleFavoriteHandler}
+      onClick={toggleFavorite}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
